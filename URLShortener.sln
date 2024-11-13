@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F72A472F-5A33-4C0F-8E31-30D6EE378B66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{326E01F6-3072-45EB-92F6-03E7EAA06689}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URLShortener", "src\URLShortener\URLShortener.csproj", "{84A2CE32-1AEA-4F88-94F6-EB7875A8BB81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URLShortener.Infrastracture", "Shared\URLShortener.Infrastracture\URLShortener.Infrastracture.csproj", "{3D0A277D-9432-433E-832C-52125F6FA263}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URLShortener.Core", "src\URLShortener.Core\URLShortener.Core.csproj", "{9EF38DB2-CCDD-410C-B07D-FA2FD2B5D4E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URLShortener.Shared", "src\URLShortener.Shared\URLShortener.Shared.csproj", "{4C1FC75F-BED9-4A6E-BBD5-588D1D21CDFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84A2CE32-1AEA-4F88-94F6-EB7875A8BB81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A2CE32-1AEA-4F88-94F6-EB7875A8BB81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84A2CE32-1AEA-4F88-94F6-EB7875A8BB81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84A2CE32-1AEA-4F88-94F6-EB7875A8BB81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D0A277D-9432-433E-832C-52125F6FA263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D0A277D-9432-433E-832C-52125F6FA263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D0A277D-9432-433E-832C-52125F6FA263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D0A277D-9432-433E-832C-52125F6FA263}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EF38DB2-CCDD-410C-B07D-FA2FD2B5D4E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EF38DB2-CCDD-410C-B07D-FA2FD2B5D4E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EF38DB2-CCDD-410C-B07D-FA2FD2B5D4E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EF38DB2-CCDD-410C-B07D-FA2FD2B5D4E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C1FC75F-BED9-4A6E-BBD5-588D1D21CDFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1FC75F-BED9-4A6E-BBD5-588D1D21CDFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1FC75F-BED9-4A6E-BBD5-588D1D21CDFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1FC75F-BED9-4A6E-BBD5-588D1D21CDFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{84A2CE32-1AEA-4F88-94F6-EB7875A8BB81} = {F72A472F-5A33-4C0F-8E31-30D6EE378B66}
+		{3D0A277D-9432-433E-832C-52125F6FA263} = {326E01F6-3072-45EB-92F6-03E7EAA06689}
+		{9EF38DB2-CCDD-410C-B07D-FA2FD2B5D4E2} = {F72A472F-5A33-4C0F-8E31-30D6EE378B66}
+		{4C1FC75F-BED9-4A6E-BBD5-588D1D21CDFD} = {F72A472F-5A33-4C0F-8E31-30D6EE378B66}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {261FD1FB-0542-469D-BFD1-431EABD20084}
+	EndGlobalSection
+EndGlobal
