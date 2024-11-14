@@ -30,8 +30,16 @@ public static class Extensions
             .Produces(500)
             .WithOpenApi();
 
-        app.MapPut("", async (CreateShortenedUrlDto dto, IUrlShortenerService service) =>
+        app.MapPut("", async (CreateShortenedUrlDto dto, IUrlShortenerService service, HttpContext httpContext) =>
             {
+                if (!string.IsNullOrEmpty(dto.Id))
+                {
+                    var targetUrl =
+                        $"{httpContext.Request.Scheme}://{httpContext.Request.Host}{httpContext.Request.PathBase}/{dto.Id}";
+                    if (dto.OriginalUrl == targetUrl)
+                        return Results.BadRequest("Original URL cannot be the same as the shortened URL");
+                }
+
                 try
                 {
                     var result = await service.Create(dto);
