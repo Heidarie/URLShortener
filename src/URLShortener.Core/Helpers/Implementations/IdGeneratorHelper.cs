@@ -19,8 +19,15 @@ internal class IdGeneratorHelper(IUrlShortenerRepository repository) : IIdGenera
             {
                 sb.Append(Alphanumeric[random.Next(Alphanumeric.Length)]);
             }
-        } while (await repository.GetById(sb.ToString()) is not null);
+        } while (await IsIdTaken(sb.ToString()));
 
         return sb.ToString();
+    }
+
+    private async Task<bool> IsIdTaken(string id)
+    {
+        var entity = await repository.GetById(id);
+
+        return entity is not null && (entity.ExpiresAt is null || entity.ExpiresAt.Value > DateTime.UtcNow);
     }
 }

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\URLShortener.Abstractions\URLShortener.Abstractions.csproj" />
     <ProjectReference Include="..\URLShortener.Core\URLShortener.Core.csproj" />
     <ProjectReference Include="..\URLShortener.Shared\URLShortener.Shared.csproj" />
   </ItemGroup>

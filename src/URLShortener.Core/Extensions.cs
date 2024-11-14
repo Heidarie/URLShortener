@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
+using URLShortener.Abstractions.Services.Interfaces;
 using URLShortener.Core.DAL;
 using URLShortener.Core.DAL.Repositories;
 using URLShortener.Core.Helpers.Implementations;
 using URLShortener.Core.Helpers.Interfaces;
 using URLShortener.Core.Repositories;
 using URLShortener.Core.Services.Implementations;
-using URLShortener.Core.Services.Interfaces;
 using URLShortener.Infrastracture.Postgres;
 
 [assembly: InternalsVisibleTo("URLShortener")]

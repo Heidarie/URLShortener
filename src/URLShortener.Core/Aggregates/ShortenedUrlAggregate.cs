@@ -18,12 +18,25 @@ internal class ShortenedUrlAggregate
         CreatedAt = DateTime.UtcNow;
     }
 
+    public ShortenedUrlAggregate(ShortenedUrl entity)
+    {
+        Id = entity.Id;
+        OriginalUrl = entity.OriginalUrl;
+        ExpiresAt = entity.ExpiresAt;
+        CreatedAt = DateTime.UtcNow;
+    }
+
     public ShortenedUrlAggregate(string id, CreateShortenedUrlDto dto)
     {
         Id = id;
         OriginalUrl = dto.OriginalUrl;
         ExpiresAt = dto.ExpiresAt;
         CreatedAt = DateTime.UtcNow;
+    }
+
+    public void SetNewUrl(string originalUrl)
+    {
+        OriginalUrl = originalUrl;
     }
 
     public ShortenedUrl ToEntity()

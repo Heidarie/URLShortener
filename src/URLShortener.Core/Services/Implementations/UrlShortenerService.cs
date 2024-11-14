@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Text.RegularExpressions;
+using URLShortener.Abstractions.Services.Interfaces;
 using URLShortener.Core.Aggregates;
 using URLShortener.Core.Exceptions;
 using URLShortener.Core.Helpers.Interfaces;
 using URLShortener.Core.Repositories;
-using URLShortener.Core.Services.Interfaces;
 using URLShortener.Shared.DTOS.Input;
 using URLShortener.Shared.DTOS.Output;
 
@@ -39,31 +39,52 @@ internal class UrlShortenerService(IUrlShortenerRepository repository, IIdGenera
                 throw new IdPatternNotMatchedException(dto.Id);
             }
 
-            if (await repository.GetById(dto.Id) is not null)
+            var entity = await repository.GetById(dto.Id);
+
+            if (entity is not null && (entity.ExpiresAt is null || entity.ExpiresAt.Value > DateTime.UtcNow))
             {
                 throw new IdAlreadyExistsException(dto.Id);
             }
 
-            aggregate = new ShortenedUrlAggregate(dto);
+            try
+            {
+                if (entity is not null)
+                {
+                    aggregate = new ShortenedUrlAggregate(entity);
+                    aggregate.SetNewUrl(dto.OriginalUrl);
+                    await repository.Update(aggregate.ToEntity());
+                }
+                else
+                {
+                    aggregate = new ShortenedUrlAggregate(dto);
+                    await repository.Create(aggregate.ToEntity());
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to create shortened URL");
+                throw new UrlCreationFailedException();
+            }
         }
         else
         {
-            string id = await idGeneratorHelper.GenerateId();
-            aggregate = new ShortenedUrlAggregate(id, dto);
+            try
+            {
+                string id = await idGeneratorHelper.GenerateId();
+                aggregate = new ShortenedUrlAggregate(id, dto);
+                await repository.Create(aggregate.ToEntity());
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to create shortened URL");
+                throw new UrlCreationFailedException();
+            }
         }
 
-        try
-        {
-            await repository.Create(aggregate.ToEntity());
-            return new ShortenedUrlDto(aggregate.Id, aggregate.OriginalUrl);
-        }
-
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Failed to create shortened URL");
-            throw new UrlCreationFailedException();
-        }
+        return new ShortenedUrlDto(aggregate.Id, aggregate.OriginalUrl);
     }
+
+
 
     public async Task Delete(string id)
     {
