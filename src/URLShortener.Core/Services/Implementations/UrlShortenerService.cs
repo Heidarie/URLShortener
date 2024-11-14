@@ -19,7 +19,8 @@ internal class UrlShortenerService(IUrlShortenerRepository repository, IIdGenera
         try
         {
             var entity = await repository.GetById(id);
-            return entity?.OriginalUrl;
+
+            return entity?.ExpiresAt < DateTime.UtcNow ? null : entity?.OriginalUrl;
         }
         catch (Exception ex)
         {

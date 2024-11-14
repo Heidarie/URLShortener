@@ -26,6 +26,7 @@ public static class Extensions
             })
             .WithName("GetShortUrlById")
             .Produces(400)
+            .Produces(404)
             .Produces(500)
             .WithOpenApi();
 
@@ -62,12 +63,17 @@ public static class Extensions
                     await service.Delete(id);
                     return Results.NoContent();
                 }
+                catch (EntityNotFoundException)
+                {
+                    return Results.NotFound();
+                }
                 catch (Exception ex)
                 {
                     return Results.Problem(statusCode: 500);
                 }
             })
             .WithName("DeleteShortUrl")
+            .Produces(404)
             .Produces(500)
             .WithOpenApi();
     }

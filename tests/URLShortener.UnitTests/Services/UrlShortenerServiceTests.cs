@@ -55,6 +55,21 @@ public class UrlShortenerServiceTests
     }
 
     [Fact]
+    public async Task GetById_ShouldReturnNull_WhenEntityIsExpired()
+    {
+        // Arrange
+        var id = "existingId";
+        var entity = new ShortenedUrl() { Id = id, OriginalUrl = "http://example.com", CreatedAt = DateTime.UtcNow, ExpiresAt = new DateTime(2024, 9, 11)};
+        _repositoryMock.Setup(repo => repo.GetById(id)).ReturnsAsync(entity);
+
+        // Act
+        var result = await _urlShortenerService.GetById(id);
+
+        // Assert
+        Assert.Null(result);
+    }
+
+    [Fact]
     public async Task Create_ShouldReturnShortenedUrlDto_WhenUrlIsCreated()
     {
         // Arrange
